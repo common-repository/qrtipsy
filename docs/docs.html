@@ -1,0 +1,143 @@
+<div id="qr_documentation">
+	<h3 id="toc"><strong>Table of Contents</strong></h3>
+	<ol class="alpha">
+		<li><a href="#quicksetup">Quick setup</a></li>
+		<li><a href="#global">global parameters</a></li>
+		<li><a href="#styling">CSS Styling - Skins</a></li>
+		<li><a href="#wordpress">Some Tips and Tricks</a></li>
+	</ol>
+	
+	<hr />
+	
+	<h3 id="quicksetup">A. <strong>Quick Setup</strong> - <a href="#toc">Top</a></h3>
+	<p>The following is a quick guide designed to show you the basic steps required to insert <strong>QR ToolTips</strong> into wordpress pages.</p>
+	<img src="<?php echo $this->pluginUrl ?>docs/quick_start_01.png" alt="qr quick start" />
+	
+	<ol id="quick1">
+		<li>In the "Settings" tab, select the skin for your <strong>QR ToolTip</strong></li>
+		<li>For a Qr ToolTip There are six Colors.</li>
+		<li>Use the Buttons Bar to Set Skin of Your Tooltip as told in step one.</li>
+	</ol>
+	<img src="<?php echo $this->pluginUrl; ?>docs/quick_start_02.png" alt="qr quick start" />
+	
+	<ol id="quick2" start="4">
+		<li>Using the slider set the <strong>Size</strong>(in px) of Your Qr Code.</li>
+		<li>Set the desired <strong>Timeout</strong> of your Tooltip(its in milliseconds).</li>
+		<li>The third option <strong>Randomizr</strong> can be used to add the tooltips randomly any skin. All the tooltips will have any color with every reload.</li>
+		<li>Note: if you use Randomizr then it'll disable your default skin selection. Basically, Randomizr overrides your default selection with any random selection of color(only those available.)</li>
+	</ol>
+	
+	<h3 id="global">B. <strong>Global Parameters</strong> - <a href="#toc">Top</a></h3>
+	<p>
+		
+	</p>
+	<table class="widefat">
+		<thead>
+			<tr>
+				<th>Parameter</th>
+				<th>Accepted values</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Skin</td>
+				<td>Choose the Tooltip skin (can be overriden)</td>
+			</tr>
+			<tr>
+				<td>Size</td>
+				<td>Set default Tooltip size (can be overriden)</td>
+			</tr>
+			<tr>
+				<td>Timeout</td>
+				<td>Set default Tooltip Timeout (can be overriden)</td>
+			</tr>
+			<tr>
+				<td>Randomize</td>
+				<td>Default No. Use to randomly apply colors to your tooltips making your page full of colorful Qr tooltips.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<hr />
+	
+	<h3 id="styling">C. <strong>Basic Styling</strong> - <a href="#toc">Top</a></h3>
+	<p>Basic styling of elements skin can be accomplished in a very simple way 
+		by adding a bunch of rules to your wordpress theme css. QrTipsy comes with 6 skins so you'll need to add skin name to rules in order to customize
+		styles for a give skin.	All rules will be then prefixed with the
+	</p>
+<pre>
+.colorTip .SKIN_NAME
+</pre>
+	<p>
+	selector, in the following example we'll assume changes are applied to default skin i.e "black" skin but you can replace ".black" with ".red" / ".green" / ".blue" / ".white" / ".yellow" to override other skins settings.<br>
+	<br />
+	For example, to change tooltips frame border, you'll just need to add
+	</p>
+<pre>
+/* set border size to 8px */
+.colorTip .black  {
+	/* customize rounded border (not supported in ie < 9) */
+	-moz-border-radius: 8px; 
+	-webkit-border-radius: 8px; 
+	border-radius: 8px;
+}
+</pre>
+		<p>The border area can use a solid color.</p>
+<pre>
+.colorTip .black {
+	background-color:#E0DEDF; /* This is necessary as this forms the actual border of the tooltip*/
+	border-color:1px solid #E0DEDF;
+}
+</pre>
+	<p>The tip Pointing Towards the link should have the same color. To do that for the same skin, you'll just add
+	</p>
+<pre>
+/* Since we're working on the tip of the tooltip so the prefix will also change */
+.pointyTip .black {
+	border-top-color:#E0DEDF;
+}
+.pointyTipShadow .black {
+	border-top-color:#E0DEDF;
+}
+</pre>
+	<p>
+	The only thing you have to pay attention is to have these rules <strong>after</strong> component skin has been loaded,	if that's not possible, you can use "!important" to make sure your customizations override default values. 
+	</p>
+	
+	<hr />
+	
+	<h3 id="wordpress">D <strong>Some Tips and Tricks</strong> - <a href="#toc">Top</a></h3>
+	<strong>Tip 1.</strong>
+	<p>If Your Theme allows you to add javascript files to your theme then you can modify default implementation of QR tooltips to links with id = "qrtipsy" to some other links with id="myid"</p>
+	<p>So Lets see How to do this to a link with id="myid", to apply default qr settings just do the following</p>
+<pre>
+&lt;script type=&quot;text/javascript&quot;&gt;
+	jQuery(document).ready(function() {
+		$('a#myid').qr({ color: 'black', size: 80, timeout: 500});
+	});
+&lt;/script&gt;
+</pre>
+
+	<p>Again, over here as well the only thing you need to do id load this file in footer, so that the default settings are overriden.</p>
+	
+	<strong>Tip 2.</strong>
+	<p>If you have your default skin setting saved to red, but you want a specific link with id="qrtipsy" to have some other skin for example black, then you can do this</p>
+<pre>&lt;a href=&quot;http://www.example.com/&quot; class=&quot;black&quot; id=&quot;qrtipsy&quot;&gt;QR Tipsy&lt;/a&gt;</pre>
+	<p>You just need to add class="SKIN_NAME" where SKIN_NAME can be other than default skin.</p>
+
+	<h3 id="outro"><strong>Thank You!</strong> - <a href="#toc">Top</a></h3>
+	
+	<p>Once again, thank you so much for downloading and using this plugin. If the above help documentation has not answered your questions, the following are your options:</p>
+	<ol>
+
+		<li>Go to <a href="http://www.agnelwaghela.wordpress.com/">QrTipsy Home</a>, and read through the questions left there by others. In general other users tend to have similar questions, and if this is the case, then your questions is likely to have already been answered there.</li>
+		
+		<li>If an answer to your question cannot be found, feel free to leave a comment of your own. Be sure to describe your problem in as much detail as possible and we will get back to you as soon as we can.</li>
+	</ol>
+
+	<p class="append-bottom alt large"><strong>regards, Agnel Waghela</strong></p>
+
+	<p><a href="#toc">Go To Table of Contents</a></p>
+	<hr class="space">
+
+</div>
